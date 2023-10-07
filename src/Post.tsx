@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import Vote from './Vote'
 
-function Post({ depth }) {
+interface CompletePost {
+  id: number,
+  currName: string,
+  currText: string;
+}
+function Post({ depth } : {depth:number}) {
   const [name, setName] = useState('');
   const [text, setText] = useState('');
-  const [replies, setReplies] = useState([]);
+  const [replies, setReplies] = useState<CompletePost[]>([]);
   const [willReply, setWillReply] = useState(false)
   
   const canAddReply = depth < 3;
@@ -40,6 +45,7 @@ function Post({ depth }) {
         <button 
           type = "button" 
           onClick={addReply}
+          className=' to-blue-800'
         >Post</button>
       )}
 
