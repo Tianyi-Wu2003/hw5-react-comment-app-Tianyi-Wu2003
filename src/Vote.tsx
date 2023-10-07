@@ -4,10 +4,11 @@ function Vote () {
     const [vote, setVote] = useState(0)
 
     return (
-        <div>
+        <div className="flex flex-col place-items-end p-4 ">
             <button
                 type = "button"
                 onClick={() => setVote(vote + 1)}
+                className=' text-green-600'
             >
                 +
             </button>
@@ -15,6 +16,7 @@ function Vote () {
             <button
                 type = "button"
                 onClick={() => setVote(vote - 1)}
+                className=' text-red-600'
             >
                 -
             </button>
