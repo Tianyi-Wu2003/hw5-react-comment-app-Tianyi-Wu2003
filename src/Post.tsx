@@ -29,42 +29,49 @@ function Post({ depth } : {depth:number}) {
   }
 
   return (
-    <div className=" container mx-auto mb-7">
-      <input 
-        type="text"
-        placeholder="Your Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <textarea
-        placeholder="Enter your post or reply"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      />
-      {canAddReply && (
+    <div className=" p-4 container mx-auto mb-4 border-2 rounded">
+      <div className=' flex flex-col'>
+        <input 
+          type="text"
+          placeholder="Your Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          className='container mx-auto mb-2 border-2 rounded'
+        />
+        <textarea
+          placeholder="Enter your post or reply"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          className='container mx-auto mb-2 border-2 rounded'
+        />
         <button 
           type = "button" 
           onClick={addReply}
-          className=' to-blue-800'
-        >Post</button>
-      )}
+          className=' text-white text-left bg-sky-500 mr-auto'
+          >Post
+        </button>
+        
 
-      {replies.map((content) => (
-        <div key={content.id}>
-          <div>
-            <p>{content.currName}</p>
-            <p>{content.currText}</p>
-            <Vote/>
-            <button
-              type = "button"
-              onClick={() => setWillReply(!willReply)}
-            >
-              {willReply ? "Hide replies" : "Reply"}
-            </button>
-          </div>
-          {willReply && <Post depth={depth + 1} />}
-        </div>
-      ))}
+        {replies.map((content) => (
+          <><div key={content.id} className='flex-row flow-root'>
+            <div className=' float-left'>
+              <p>{content.currName}</p>
+              <p>{content.currText}</p>
+              <button
+                type="button"
+                onClick={() => setWillReply(!willReply)}
+              >
+                {willReply ? "Hide replies" : "Reply"}
+              </button>
+            </div>
+            <div className=' float-right'>
+              <Vote />
+            </div>
+          </div><div>
+              {willReply && canAddReply && <Post depth={depth + 1} />}
+            </div></>
+        ))}
+      </div>
     </div>
   );
 }
